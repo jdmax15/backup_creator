@@ -5,7 +5,10 @@ def create_zip(folder):
     # Declare folder/zip name. Will increment each time. 
     current_date = datetime.datetime.fromtimestamp(time.time()).strftime('%d_%b_%Y')
     print(current_date)
-    zip_file_name = f'{current_date}_Code_Backup.zip'
+    if "JAVA" in folder:
+        zip_file_name = f'{current_date}_JAVA_Code_Backup.zip'
+    elif "PYTHON" in folder:
+        zip_file_name = f'{current_date}_PYTHON_Code_Backup.zip'
     print(f'Creating {zip_file_name}...')
     backup_zip = zipfile.ZipFile(zip_file_name, 'w')    
 
@@ -61,7 +64,7 @@ def send_to_pi(localpath, remotepath, pi_ip):
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=pi_ip, username=username, password=password)
         sftp = ssh.open_sftp()
-        print(f"CONNECTED. Uploading {localpath} to {remotepath}...")
+        print(f"CONNECTED.\nUploading {localpath} to {remotepath}...")
         sftp.put(localpath, remotepath)
         print(f'SUCCESS: File {localpath} successfully sent to {remotepath}')
 
