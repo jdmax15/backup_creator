@@ -5,10 +5,14 @@ def create_zip(folder):
     # Declare folder/zip name. Will increment each time. 
     current_date = datetime.datetime.fromtimestamp(time.time()).strftime('%d_%b_%Y')
     print(current_date)
+
     if "JAVA" in folder:
         zip_file_name = f'{current_date}_JAVA_Code_Backup.zip'
+        zip_type = "JAVA"
     elif "PYTHON" in folder:
         zip_file_name = f'{current_date}_PYTHON_Code_Backup.zip'
+        zip_type = "PYTHON"
+
     print(f'Creating {zip_file_name}...')
     backup_zip = zipfile.ZipFile(zip_file_name, 'w')    
 
@@ -22,9 +26,12 @@ def create_zip(folder):
             if filename.startswith(new_base) and filename.endswith('.zip'):
                 continue
             backup_zip.write(os.path.join(foldername, filename))
+
+    zip_size = os.path.getsize(zip_file_name)
     backup_zip.close()
+
     print('Done.')
-    return str(zip_file_name)
+    return str(zip_file_name), zip_size, zip_type
 
 # Returns a boolean reponse if Pi remote IP Address can be reached.
 def ping_test(ip_address):
