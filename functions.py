@@ -1,9 +1,11 @@
 import zipfile, os, datetime, time, paramiko, subprocess, re
  
 def create_zip(folder):
+
     folder = os.path.abspath(folder)
-    # Declare folder/zip name. Will increment each time. 
+
     current_date = datetime.datetime.fromtimestamp(time.time()).strftime('%d_%b_%Y')
+
     print(current_date)
 
     if "JAVA" in folder:
@@ -12,6 +14,9 @@ def create_zip(folder):
     elif "PYTHON" in folder:
         zip_file_name = f'{current_date}_PYTHON_Code_Backup.zip'
         zip_type = "PYTHON"
+    elif "MyScripts" in folder:
+        zip_file_name = f'{current_date}_SCRIPTS_Backup.zip'
+        zip_type = "SCRIPTS"    
 
     print(f'Creating {zip_file_name}...')
     backup_zip = zipfile.ZipFile(zip_file_name, 'w')    

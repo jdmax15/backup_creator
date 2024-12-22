@@ -1,10 +1,13 @@
 #! python3
 # backup_creator - Periodically backs up a folder into a zip before sending it to my raspberry Pi for storage.
 
+# TODO: SCRIPTS.zip ISNT APPEARING ON THE PI BUT ITS SAYING ITS SENT.
+
+
 import os
 from functions import create_zip, ping_test, send_to_pi
 
-BACKUP_FROM = ['C:\\Users\\Joelm\\PYTHON_LEARNING', 'C:\\Users\\Joelm\\JAVA_LEARNING']
+BACKUP_FROM = ['C:\\Users\\Joelm\\JAVA_LEARNING', 'C:\\MyScripts']
 BACKUP_TO = 'C:\\Backups'
 REMOTE_PATH = '/home/jdmax15/Desktop/Backups'
 REMOTE_IP = '192.168.1.7'
@@ -25,6 +28,8 @@ def main():
             remote_path = f"/home/jdmax15/Desktop/Backups/PYTHON/{zip_name}"
         elif "JAVA" in zip_name:
             remote_path = f"/home/jdmax15/Desktop/Backups/JAVA/{zip_name}"
+        elif "SCRIPTS" in zip_name:
+            remote_path = f"/home/jdmax15/Desktop/Backups/Scripts/{zip_name}"
 
         # Check if the size of the last backup on the Pi is same as the latest and skip sending if it is.
         with open(f"{zip_type}_zip_size.txt", "r") as file:
