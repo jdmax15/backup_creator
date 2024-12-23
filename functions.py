@@ -1,5 +1,12 @@
 import zipfile, os, datetime, time, paramiko, subprocess, re
- 
+
+BACKUP_TYPES = {
+    "JAVA": "JAVA_Code_Backup",
+    "PYTHON": "PYTHON_Code_Backup",
+    "MyScripts": "SCRIPTS_Backup"
+}
+
+
 def create_zip(folder):
 
     folder = os.path.abspath(folder)
@@ -8,15 +15,17 @@ def create_zip(folder):
 
     print(current_date)
 
-    if "JAVA" in folder:
-        zip_file_name = f'{current_date}_JAVA_Code_Backup.zip'
-        zip_type = "JAVA"
-    elif "PYTHON" in folder:
-        zip_file_name = f'{current_date}_PYTHON_Code_Backup.zip'
-        zip_type = "PYTHON"
-    elif "MyScripts" in folder:
-        zip_file_name = f'{current_date}_SCRIPTS_Backup.zip'
-        zip_type = "SCRIPTS"    
+    zip_file_name = None
+    zip_type = None
+
+    for key, value in BACKUP_TYPES.items():
+        if key in folder:
+            zip_file_name = f'{current_date}_{value}.zip'
+            zip_type = key
+            break
+
+    if zip_file_name is None or zip_type is None:
+        raise ValueError("Folder type not recognized")
 
     print(f'Creating {zip_file_name}...')
     backup_zip = zipfile.ZipFile(zip_file_name, 'w')    

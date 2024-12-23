@@ -1,7 +1,7 @@
 #! python3
 # backup_creator - Periodically backs up a folder into a zip before sending it to my raspberry Pi for storage.
 
-# TODO: SCRIPTS.zip ISNT APPEARING ON THE PI BUT ITS SAYING ITS SENT.
+# TODO: Replace print statements with logging statements.
 
 
 import os
