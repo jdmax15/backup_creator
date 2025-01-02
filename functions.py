@@ -3,10 +3,10 @@ import zipfile, os, datetime, time, paramiko, subprocess, re
 BACKUP_TYPES = {
     "JAVA": "JAVA_Code_Backup",
     "PYTHON": "PYTHON_Code_Backup",
-    "MyScripts": "SCRIPTS_Backup"
+    "SCRIPTS": "SCRIPTS_Backup"
 }
 
-
+# Creates a .zip file of the specified folder and returns the name, size and type of the .zip file.
 def create_zip(folder):
 
     folder = os.path.abspath(folder)
