@@ -7,7 +7,7 @@ from functions import create_zip, ping_test, send_to_pi
 
 BACKUP_FROM = ['C:\\Users\\Joelm\\JAVA_LEARNING', 'C:\\Users\\Joelm\\PYTHON_LEARNING', 'C:\\SCRIPTS']
 BACKUP_TO = 'C:\\Backups'
-REMOTE_PATH = '/home/jdmax15/Desktop/Backups'
+REMOTE_PATH = '/home/jdmax15/Documents/Backups'
 REMOTE_IP = '192.168.1.50'
 
 # Configure logging
@@ -24,11 +24,11 @@ def main():
         
         # Adds the new .zip name to the remote absolute filepath.
         if "PYTHON" in zip_name:    
-            remote_path = f"/home/jdmax15/Desktop/Backups/PYTHON/{zip_name}"
+            remote_path = f"{REMOTE_PATH}/PYTHON/{zip_name}"
         elif "JAVA" in zip_name:
-            remote_path = f"/home/jdmax15/Desktop/Backups/JAVA/{zip_name}"
+            remote_path = f"{REMOTE_PATH}/JAVA/{zip_name}"
         elif "SCRIPTS" in zip_name:
-            remote_path = f"/home/jdmax15/Desktop/Backups/SCRIPTS/{zip_name}"
+            remote_path = f"{REMOTE_PATH}/SCRIPTS/{zip_name}"
 
         # Check if the size of the last backup on the Pi is same as the latest and skip sending if it is.
         with open(f"{zip_type}_zip_size.txt", "r") as file:
