@@ -29,6 +29,9 @@ def main():
             remote_path = f"{REMOTE_PATH}/JAVA/{zip_name}"
         elif "SCRIPTS" in zip_name:
             remote_path = f"{REMOTE_PATH}/SCRIPTS/{zip_name}"
+        else:
+            logging.error('Could not determine the type of folder being backed up.')
+            continue
 
         # Check if the size of the last backup on the Pi is same as the latest and skip sending if it is.
         with open(f"{zip_type}_zip_size.txt", "r") as file:
@@ -45,7 +48,7 @@ def main():
                         logging.info(f"{zip_name} successfully backed up and sent to {REMOTE_IP}.")
                     else:
                         logging.error('Could not reach destination IP.')
-                        logging.info(f"{zip_name} was backed up but failed to sent to {REMOTE_IP}.")
+                        logging.info(f"{zip_name} was backed up locally but failed to send to {REMOTE_IP}.")
                 except Exception as e:
                     logging.error(e)
 
