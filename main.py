@@ -1,6 +1,9 @@
 #! python3
 # backup_creator - Periodically backs up a folder into a zip before sending it to my raspberry Pi for storage.
 
+# TODO: Turn REMOTE_IP and REMOTE_PATH into a dictionary for multiple remote locations for backups. 
+# Add functionality for files to also be stored on the Zero 2 W Samba Shared folder. (192.168.1.242/Shared/Backups)
+
 import os
 import logging
 from functions import create_zip, ping_test, send_to_pi
