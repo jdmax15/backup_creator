@@ -73,17 +73,19 @@ def ping_test(ip_address):
 
 # Uses paramiko module to establish an ssh connection and send the .zip file to the Pi.
 def send_to_pi(localpath, remotepath, pi_ip):
-    username = 'jdmax15'
-    password = '1962'
+    pi5_username = 'jdmax15'
+    pi5_password = '1962'
+    piZ2_username = 'pi'
+    piZ2_password = 'raspberry'
 
     ssh = None
     sftp = None
 
     try:        
-        print(f"ATTEMPTING TO CONNECT to {pi_ip} with username {username}")
+        print(f"ATTEMPTING TO CONNECT to {pi_ip} with pi5_username {pi5_username}")
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname=pi_ip, username=username, password=password)
+        ssh.connect(hostname=pi_ip, pi5_username=pi5_username, pi5_password=pi5_password)
         sftp = ssh.open_sftp()
         print(f"CONNECTED.\nUploading {localpath} to {remotepath}...")
         sftp.put(localpath, remotepath)
